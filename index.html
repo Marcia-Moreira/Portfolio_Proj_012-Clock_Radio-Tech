@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Clock Radio - Tech</title>
+</head>
+<!-- ----------------------------------------------------------------- -->
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 24px;
+        text-decoration: none;
+        list-style-type: none;
+        /* Sobreposição para todos acima dos favos: */
+        z-index: 2;
+    }
+    :root {
+        /* Cores Padrões: */
+        --cor-bg-primaria: #000;
+        --cor-bg-secundaria: #a9a7a7;
+        --cor-bg-terciaria: #f1f1f1;
+
+        --cor-txt-primaria: #f1f1f1;
+        --cor-txt-secundaria: #000;
+        --cor-txt-terciaria: #a9a7a7;
+    }
+    body {
+        color: var(--cor-txt-primaria);
+        background-color: var(--cor-bg-primaria);
+    }
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 10%;
+        border: 1px solid var(--cor-txt-primaria);
+        border-radius: 15px;
+        box-shadow: 0 4px 28px rgba(247, 246, 246, 0.509);
+    }
+    .tela-principal {
+        background-color: var(--cor-bg-secundaria);
+    }
+    /* Título: */
+    label {
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        padding: 1rem;
+    }
+    select {
+        font-size: 1rem;
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    }
+    .radio-conectar {
+        font-style: normal;
+        padding: 1rem;
+    }
+    .radio-botoes {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+    .radio-botoes button {
+        padding: 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--cor-bg-terciaria);
+        transition: .5s ease-in-out;
+        border-radius: 10px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    }
+    .radio-botoes button:hover {
+        background-color: var(--cor-bg-primaria);
+        color: var(--cor-txt-primaria);
+        cursor: pointer;
+    }
+    .aviso {
+        padding: 2rem;
+    }
+
+</style>
+<!-- ----------------------------------------------------------------- -->
+<body>
+<!-- ----------------------------------------------------------------- -->
+    <section class="tela-principal">
+
+        <label for="interval">Notificar a cada:</label>
+        <select id="interval">
+            <option value="5">5 minutos</option>
+            <option value="10">10 minutos</option>
+            <option value="15">15 minutos</option>
+        </select>
+<!-- ----------------------------------------------------------------- -->
+        <div class="radio-conectar">
+            <div>
+                <p>Radio Frequence True</p>
+                <a href="#"></a>
+            </div>
+        </div>
+<!-- ----------------------------------------------------------------- -->
+        <div class="radio-botoes">
+            <button id="start">Iniciar</button>
+
+            <button id="stop">Parar</button>
+        </div>
+<!-- ----------------------------------------------------------------- -->
+        <div class="aviso">
+            <p>Vá em Configurações > Aplicativos > Nome do App > Bateria e ative "Execução em Segundo Plano".</p>
+        </div>
+<!-- ----------------------------------------------------------------- -->
+    </section>
+<!-- ----------------------------------------------------------------- -->
+    <script src="./script.js"></script>
+    <script src="./service-worker.js"></script>
+<!-- ----------------------------------------------------------------- -->
+</body>
+</html>
+
