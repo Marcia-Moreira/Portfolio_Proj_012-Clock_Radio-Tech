@@ -12,6 +12,7 @@ document.getElementById("interval").addEventListener("change", function() {
 });
 
 document.getElementById("start").addEventListener("click", function() {
+    requestWakeLock(); // Ativa a tela ligada ao iniciar
     speak(`Iniciando cronômetro, notificações a cada ${interval} minutos.`);
     timer = setInterval(() => {
         speak(`${interval} minutos se passaram.`);
@@ -20,13 +21,10 @@ document.getElementById("start").addEventListener("click", function() {
 
 document.getElementById("stop").addEventListener("click", function() {
     clearInterval(timer);
+    releaseWakeLock(); // Libera o wake lock se o cronômetro parar
     speak("Cronômetro parado.");
 });
 
-// function speak(text) {
-//     let utterance = new SpeechSynthesisUtterance(text);
-//     speechSynthesis.speak(utterance);
-// }
 function speak(text) {
     let utterance = new SpeechSynthesisUtterance(text);
     utterance.volume = 1; // Garante que seja audível
@@ -44,3 +42,35 @@ if ('serviceWorker' in navigator) {
     .then(() => console.log("Service Worker registrado!"))
     .catch(err => console.log("Erro ao registrar Service Worker:", err));
 }
+
+// -------------------------
+// WAKE LOCK (mantém a tela ligada)
+// -------------------------
+
+let wakeLock = null;
+
+async function requestWakeLock() {
+    try {
+        wakeLock = await navigator.wakeLock.request("screen");
+        console.log("🔒 Wake Lock ativado: tela não vai apagar.");
+    } catch (err) {
+        console.error(`❌ Erro ao ativar Wake Lock: ${err.name}, ${err.message}`);
+    }
+}
+
+// Libera o wake lock (opcional)
+function releaseWakeLock() {
+    if (wakeLock !== null) {
+        wakeLock.release().then(() => {
+            console.log("🔓 Wake Lock liberado.");
+            wakeLock = null;
+        });
+    }
+}
+
+// Reativa se for perdido (ex: gira a tela)
+document.addEventListener("visibilitychange", () => {
+    if (wakeLock !== null && document.visibilityState === "visible") {
+        requestWakeLock();
+    }
+});

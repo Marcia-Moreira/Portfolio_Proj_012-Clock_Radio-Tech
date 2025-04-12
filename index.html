@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="./styles.css">
     <title>Clock Radio - Tech</title>
 </head>
@@ -72,7 +73,8 @@
         align-items: center;
         gap: 2rem;
     }
-    .radio-botoes button {
+    .radio-botoes button,
+    .tela-desbloqueada button {
         padding: 1rem;
         border: none;
         border-radius: 5px;
@@ -81,7 +83,8 @@
         border-radius: 10px;
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
     }
-    .radio-botoes button:hover {
+    .radio-botoes button:hover,
+    .tela-desbloqueada button:hover {
         background-color: var(--cor-bg-primaria);
         color: var(--cor-txt-primaria);
         cursor: pointer;
@@ -120,6 +123,9 @@
             <p>Vá em Configurações > Aplicativos > Nome do App > Bateria e ative "Execução em Segundo Plano".</p>
         </div>
 <!-- ----------------------------------------------------------------- -->
+        <div class="tela-desbloqueada">
+            <button onclick="requestWakeLock()">Ativar tela sempre ligada</button>
+        </div>
     </section>
 <!-- ----------------------------------------------------------------- -->
     <script src="./script.js"></script>
